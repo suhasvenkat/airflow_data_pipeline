@@ -1,0 +1,1 @@
+airflow tasks clear csv_to_postgres_etl --yes

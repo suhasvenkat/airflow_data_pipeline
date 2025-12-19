@@ -1,0 +1,16 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Airflow
+logs/
+airflow.cfg
+
+# Environment / secrets
+.env
+
+# OS
+.DS_Store
+
+logs/
