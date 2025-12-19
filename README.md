@@ -1,45 +1,107 @@
-Overview
-========
+Airflow Data Pipeline – CSV to PostgreSQL
+📌 Project Overview
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+This project is a beginner-friendly Apache Airflow ETL pipeline that reads data from CSV files, performs basic data cleaning and transformation using Python, and loads the processed data into a PostgreSQL database.
 
-Project Contents
-================
+The goal of this project is to understand how Airflow, Python, Docker, and PostgreSQL work together in a real data engineering pipeline.
 
-Your Astro project contains the following files and folders:
+🛠️ Tech Stack
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes one example DAG:
-    - `example_astronauts`: This DAG shows a simple ETL pipeline example that queries the list of astronauts currently in space from the Open Notify API and prints a statement for each astronaut. The DAG uses the TaskFlow API to define tasks in Python, and dynamic task mapping to dynamically print a statement for each astronaut. For more on how this DAG works, see our [Getting started tutorial](https://www.astronomer.io/docs/learn/get-started-with-airflow).
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+Apache Airflow (Astro Runtime)
 
-Deploy Your Project Locally
-===========================
+Python (Pandas, SQLAlchemy)
 
-Start Airflow on your local machine by running 'astro dev start'.
+PostgreSQL
 
-This command will spin up five Docker containers on your machine, each for a different Airflow component:
+Docker
 
-- Postgres: Airflow's Metadata Database
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- DAG Processor: The Airflow component responsible for parsing DAGs
-- API Server: The Airflow component responsible for serving the Airflow UI and API
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+pgAdmin
 
-When all five containers are ready the command will open the browser to the Airflow UI at http://localhost:8080/. You should also be able to access your Postgres Database at 'localhost:5432/postgres' with username 'postgres' and password 'postgres'.
+📂 Project Structure
+airflow_data_pipeline/
+├── dags/                     # Airflow DAGs
+│   └── load_excel_to_postgres.py
+├── include/
+│   └── data/
+│       ├── building_metadata.csv
+│       └── wther.csv
+├── Dockerfile
+├── requirements.txt
+├── packages.txt
+├── airflow_settings.yaml
+├── config.yaml
+└── README.md
+🔄 Pipeline Workflow
 
-Note: If you already have either of the above ports allocated, you can either [stop your existing Docker containers or change the port](https://www.astronomer.io/docs/astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver).
+Extract
 
-Deploy Your Project to Astronomer
-=================================
+Read CSV files from include/data
 
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://www.astronomer.io/docs/astro/deploy-code/
+Transform
 
-Contact
-=======
+Standardize column names
 
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
+Handle NULL values
+
+Remove duplicates
+
+Perform basic feature engineering
+
+Load
+
+Load cleaned data into PostgreSQL tables:
+
+building
+
+weather
+
+Orchestration
+
+Managed and scheduled using Apache Airflow
+
+▶️ How to Run the Project
+1️⃣ Start Airflow
+astro dev start
+2️⃣ Open Airflow UI
+http://localhost:8080
+3️⃣ Trigger the DAG
+
+DAG name: csv_to_postgres_etl
+
+Trigger manually from the Airflow UI
+
+🧪 Verify Output
+
+You can verify the tables using pgAdmin or psql:
+
+SELECT COUNT(*) FROM building;
+SELECT COUNT(*) FROM weather;
+✅ Features Implemented
+
+Dockerized Airflow environment
+
+CSV to PostgreSQL ETL pipeline
+
+Data cleaning and transformation using Pandas
+
+PostgreSQL integration using Airflow hooks
+
+Manual DAG execution
+
+🚀 Future Improvements
+
+Incremental data loading
+
+TaskFlow API implementation
+
+Data quality checks
+
+Logging and monitoring
+
+Error handling and retries
+
+👤 Author
+
+Suhas Venkat
+
+Beginner Data Engineer | Learning Apache Airflow & Data Engineering
