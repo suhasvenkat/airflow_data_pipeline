@@ -1,0 +1,5 @@
+,Model,Pretraining,95th Percentile Error
+0,LSTM,No,1.4501297482973659
+1,LSTM,Yes,2.5561195648844643
+2,Transformer,No,3.1437997367327304
+3,Transformer,Yes,3.4046883224635605
